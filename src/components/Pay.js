@@ -6,7 +6,7 @@ class Pay extends React.Component {
   }
 
   render() {
-    return <div>List</div>;
+    return <div>Pay</div>;
   }
 }
 

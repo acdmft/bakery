@@ -6,7 +6,29 @@ class Add extends React.Component {
   }
 
   render() {
-    return <div>List</div>;
+    return (
+      <div className="mt-2">
+        <form>
+          <div>
+            <input type="text" onChange={this.props.onChangeText}></input>
+          </div>
+          <div>
+            <input
+              type="range"
+              min="1"
+              max="10"
+              onChange={this.props.onChangeRange}
+            ></input>
+          </div>
+        </form>
+        <button
+          className="btn btn-outline-primary"
+          onClick={this.props.onClick}
+        >
+          Add
+        </button>
+      </div>
+    );
   }
 }
 

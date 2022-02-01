@@ -22,18 +22,22 @@ class App extends React.Component {
     this.selectPay = this.selectPay.bind(this);
     this.updatePrice = this.updatePrice.bind(this);
     this.updateProductName = this.updateProductName.bind(this);
+    this.addItem = this.addItem.bind(this);
   }
   renderActiveTab() {
     switch (this.state.activeTab) {
       case "Add":
-        return <Add></Add>;
-        break;
+        return (
+          <Add
+            onChangeText={this.updateProductName}
+            onChangeRange={this.updatePrice}
+            onClick={this.addItem}
+          ></Add>
+        );
       case "List":
         return <List></List>;
-        break;
       case "Pay":
         return <Pay></Pay>;
-        break;
     }
   }
   handleClick(e) {
@@ -50,40 +54,39 @@ class App extends React.Component {
   }
   updateProductName(e) {
     this.setState({ productName: e.target.value });
-    console.log(this.state.productName)
+    console.log(this.state.productName);
   }
   updatePrice(e) {
     this.setState({ price: e.target.value });
-    console.log(this.state.price)
+    console.log(this.state.price);
   }
-  addItem(name, price) {
-    this.setState({
-      items: this.state.items.push({ name: name, price: price }),
-    });
+  addItem(e) {
+    e.preventDefault();
+    const updatedItems = this.state.items;
+    updatedItems.push({name: this.state.productName, price: this.state.price});
+    this.setState({items: updatedItems});
     console.log(this.state.items);
   }
   render() {
     return (
       <div>
         <h1>Bakery</h1>
-        <Button onClick={this.selectAdd} children={"Add"} isSelected={this.state.activeTab === 'Add'}></Button>
-        <Button onClick={this.selectList} children={"List"} isSelected={this.state.activeTab === 'List'}></Button>
-        <Button onClick={this.selectPay} children={"Pay"} isSelected={this.state.activeTab === 'Pay'}></Button>
-        <h2>{this.state.activeTab}</h2>
-        <form>
-          <div>
-            <input type="text" onChange={this.updateProductName}></input>
-          </div>
-          <div>
-            <input
-              type="range"
-              min="1"
-              max="10"
-              onChange={this.updatePrice}
-            ></input>
-          </div>
-          <button>Add</button>
-        </form>
+        <Button
+          onClick={this.selectAdd}
+          children={"Add"}
+          isSelected={this.state.activeTab === "Add"}
+        ></Button>
+        <Button
+          onClick={this.selectList}
+          children={"List"}
+          isSelected={this.state.activeTab === "List"}
+        ></Button>
+        <Button
+          onClick={this.selectPay}
+          children={"Pay"}
+          isSelected={this.state.activeTab === "Pay"}
+        ></Button>
+        {this.renderActiveTab()}
       </div>
     );
   }
