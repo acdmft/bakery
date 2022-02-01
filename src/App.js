@@ -1,5 +1,5 @@
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "./components/Button";
 import Add from "./components/Add";
 import List from "./components/List";
@@ -12,38 +12,47 @@ class App extends React.Component {
     this.state = {
       activeTab: "Add",
       items: [],
+      productName: "",
+      price: 1,
     };
     this.renderActiveTab = this.renderActiveTab.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.selectAdd = this.selectAdd.bind(this);
     this.selectList = this.selectList.bind(this);
     this.selectPay = this.selectPay.bind(this);
+    this.updatePrice = this.updatePrice.bind(this);
+    this.updateProductName = this.updateProductName.bind(this);
   }
   renderActiveTab() {
     switch (this.state.activeTab) {
       case "Add":
-        return (<Add></Add>);
+        return <Add></Add>;
         break;
       case "List":
-        return (<List></List>);
+        return <List></List>;
         break;
       case "Pay":
-        return (<Pay></Pay>);
+        return <Pay></Pay>;
         break;
     }
-  };
+  }
   handleClick(e) {
-    this.setState({activeTab: e.target.innerText});
-    console.log(this.state.activeTab);
-  };
+    this.setState({ activeTab: e.target.innerText });
+  }
   selectAdd() {
-    this.setState({activeTab: "Add"})
+    this.setState({ activeTab: "Add" });
   }
   selectList() {
-    this.setState({activeTab: "List"})
+    this.setState({ activeTab: "List" });
   }
   selectPay() {
-    this.setState({activeTab: "Pay"})
+    this.setState({ activeTab: "Pay" });
+  }
+  updateProductName(e) {
+    this.setState({productName: e.target.value});
+  }
+  updatePrice(e) {
+    this.setState({price: e.target.value});
   }
   render() {
     return (
@@ -53,9 +62,22 @@ class App extends React.Component {
         <Button onClick={this.selectList} children={"List"}></Button>
         <Button onClick={this.selectPay} children={"Pay"}></Button>
         <h2>{this.state.activeTab}</h2>
-
+        <form>
+          <div>
+            <input type="text" onChange={this.updateProductName}></input>
+          </div>
+          <div>
+            <input
+              type="range"
+              min="1"
+              max="10"
+              onChange={this.updatePrice}
+            ></input>
+          </div>
+          <button>Add</button>
+        </form>
       </div>
-    )
+    );
   }
 }
 
