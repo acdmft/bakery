@@ -35,7 +35,9 @@ class App extends React.Component {
           ></Add>
         );
       case "List":
-        return <List></List>;
+        return (<List items={this.state.items}>
+          
+        </List>);
       case "Pay":
         return <Pay></Pay>;
     }
@@ -63,29 +65,34 @@ class App extends React.Component {
   addItem(e) {
     e.preventDefault();
     const updatedItems = this.state.items;
-    updatedItems.push({name: this.state.productName, price: this.state.price});
-    this.setState({items: updatedItems});
+    updatedItems.push({
+      name: this.state.productName,
+      price: this.state.price,
+    });
+    this.setState({ items: updatedItems });
     console.log(this.state.items);
   }
   render() {
     return (
-      <div>
-        <h1>Bakery</h1>
-        <Button
-          onClick={this.selectAdd}
-          children={"Add"}
-          isSelected={this.state.activeTab === "Add"}
-        ></Button>
-        <Button
-          onClick={this.selectList}
-          children={"List"}
-          isSelected={this.state.activeTab === "List"}
-        ></Button>
-        <Button
-          onClick={this.selectPay}
-          children={"Pay"}
-          isSelected={this.state.activeTab === "Pay"}
-        ></Button>
+      <div className="w-50 mx-auto">
+        <h1 className="text-center">Bakery</h1>
+        <div className="">
+          <Button
+            onClick={this.selectAdd}
+            children={"Add"}
+            isSelected={this.state.activeTab === "Add"}
+          ></Button>
+          <Button
+            onClick={this.selectList}
+            children={"List"}
+            isSelected={this.state.activeTab === "List"}
+          ></Button>
+          <Button
+            onClick={this.selectPay}
+            children={"Pay"}
+            isSelected={this.state.activeTab === "Pay"}
+          ></Button>
+        </div>
         {this.renderActiveTab()}
       </div>
     );

@@ -6,7 +6,14 @@ class List extends React.Component {
   }
 
   render() {
-    return <div>List</div>;
+    return (<ul>
+      {this.props.items.map((item)=>{
+        return (
+          <li>Product name: {item.name}<br></br>
+          Product price: {item.price}</li>
+        );
+      })}
+    </ul>);
   }
 }
 export default List;

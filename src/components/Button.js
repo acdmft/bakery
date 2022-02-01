@@ -6,7 +6,7 @@ class Button extends React.Component {
       <button
         className="btn btn-outline-secondary"
         style={{
-          backgroundColor: this.props.isSelected ? "blue" : "transparent",
+          backgroundColor: this.props.isSelected ? "rgba(128, 130, 255, 0.5)" : "transparent",
         }}
         onClick={this.props.onClick}
       >
