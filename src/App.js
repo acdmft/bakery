@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from "./components/Button";
+import Add from "./components/Add";
+import List from "./components/List";
+import Pay from "./components/Pay";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      activeTab: "add",
+      items: [],
+    };
+    this.renderActiveTab = this.renderActiveTab.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+  renderActiveTab() {
+    switch (this.state.activeTab) {
+      case "Add":
+        return (<Add></Add>);
+        break;
+      case "List":
+        return (<List></List>);
+        break;
+      case "Pay":
+        return (<Pay></Pay>);
+        break;
+    }
+  };
+  handleClick(e) {
+    this.setState({activeTab: e.target.innerText});
+    console.log(this.state.activeTab);
+  };
+  render() {
+    return (
+      <div>
+        <h1>Bakery</h1>
+        <Button onClick={this.handleClick} children={"Add"}></Button>
+        <Button onClick={this.handleClick} children={"List"}></Button>
+        <Button onClick={this.handleClick} children={"Pay"}></Button>
+        <h2>{this.state.activeTab}</h2>
+
+      </div>
+    )
+  }
 }
 
 export default App;
