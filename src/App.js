@@ -49,18 +49,26 @@ class App extends React.Component {
     this.setState({ activeTab: "Pay" });
   }
   updateProductName(e) {
-    this.setState({productName: e.target.value});
+    this.setState({ productName: e.target.value });
+    console.log(this.state.productName)
   }
   updatePrice(e) {
-    this.setState({price: e.target.value});
+    this.setState({ price: e.target.value });
+    console.log(this.state.price)
+  }
+  addItem(name, price) {
+    this.setState({
+      items: this.state.items.push({ name: name, price: price }),
+    });
+    console.log(this.state.items);
   }
   render() {
     return (
       <div>
         <h1>Bakery</h1>
-        <Button onClick={this.selectAdd} children={"Add"}></Button>
-        <Button onClick={this.selectList} children={"List"}></Button>
-        <Button onClick={this.selectPay} children={"Pay"}></Button>
+        <Button onClick={this.selectAdd} children={"Add"} isSelected={this.state.activeTab === 'Add'}></Button>
+        <Button onClick={this.selectList} children={"List"} isSelected={this.state.activeTab === 'List'}></Button>
+        <Button onClick={this.selectPay} children={"Pay"} isSelected={this.state.activeTab === 'Pay'}></Button>
         <h2>{this.state.activeTab}</h2>
         <form>
           <div>
