@@ -21,6 +21,7 @@ class Add extends React.Component {
   addItem(e) {
     e.preventDefault();
     e.target.querySelector('input[type=text]').value = "";
+    this.setState({price: 1});
   }
 
   render() {

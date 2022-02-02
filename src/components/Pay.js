@@ -6,7 +6,7 @@ class Pay extends React.Component {
   }
 
   render() {
-    return <div>Pay</div>;
+    return <div>Pay {this.props.totalSum}</div>;
   }
 }
 

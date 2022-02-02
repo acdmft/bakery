@@ -12,15 +12,14 @@ class App extends React.Component {
     this.state = {
       activeTab: "Add",
       items: [],
-      
     };
     this.renderActiveTab = this.renderActiveTab.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.selectAdd = this.selectAdd.bind(this);
     this.selectList = this.selectList.bind(this);
     this.selectPay = this.selectPay.bind(this);
-    
     this.addItem = this.addItem.bind(this);
+    this.totalSum = this.totalSum.bind(this);
   }
   renderActiveTab() {
     switch (this.state.activeTab) {
@@ -35,7 +34,7 @@ class App extends React.Component {
       case "List":
         return <List items={this.state.items}></List>;
       case "Pay":
-        return <Pay></Pay>;
+        return <Pay totalSum={this.totalSum()}></Pay>;
     }
   }
   handleClick(e) {
@@ -50,16 +49,24 @@ class App extends React.Component {
   selectPay() {
     this.setState({ activeTab: "Pay" });
   }
-  
-  addItem(name,price) {
+
+  addItem(name, price) {
     const updatedItems = this.state.items;
     updatedItems.push({
       name: name,
       price: price,
     });
+    updatedItems.sort(function(a,b) {
+      return a.price - b.price;
+    });
     this.setState({ items: updatedItems });
-    console.log(this.state.items);
   }
+  totalSum() {
+    return this.state.items.reduce(function (a, b) {
+      return a + parseInt(b.price);
+    }, 0);
+  }
+
   render() {
     return (
       <div className="w-50 mx-auto">
