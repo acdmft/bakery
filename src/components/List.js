@@ -9,7 +9,7 @@ class List extends React.Component {
     return (<ul>
       {this.props.items.map((item)=>{
         return (
-          <li>Product name: {item.name}<br></br>
+          <li key={item.name}>Product name: {item.name}<br></br>
           Product price: {item.price}</li>
         );
       })}

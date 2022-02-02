@@ -12,16 +12,14 @@ class App extends React.Component {
     this.state = {
       activeTab: "Add",
       items: [],
-      productName: "",
-      price: 1,
+      
     };
     this.renderActiveTab = this.renderActiveTab.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.selectAdd = this.selectAdd.bind(this);
     this.selectList = this.selectList.bind(this);
     this.selectPay = this.selectPay.bind(this);
-    this.updatePrice = this.updatePrice.bind(this);
-    this.updateProductName = this.updateProductName.bind(this);
+    
     this.addItem = this.addItem.bind(this);
   }
   renderActiveTab() {
@@ -35,9 +33,7 @@ class App extends React.Component {
           ></Add>
         );
       case "List":
-        return (<List items={this.state.items}>
-          
-        </List>);
+        return <List items={this.state.items}></List>;
       case "Pay":
         return <Pay></Pay>;
     }
@@ -54,20 +50,12 @@ class App extends React.Component {
   selectPay() {
     this.setState({ activeTab: "Pay" });
   }
-  updateProductName(e) {
-    this.setState({ productName: e.target.value });
-    console.log(this.state.productName);
-  }
-  updatePrice(e) {
-    this.setState({ price: e.target.value });
-    console.log(this.state.price);
-  }
-  addItem(e) {
-    e.preventDefault();
+  
+  addItem(name,price) {
     const updatedItems = this.state.items;
     updatedItems.push({
-      name: this.state.productName,
-      price: this.state.price,
+      name: name,
+      price: price,
     });
     this.setState({ items: updatedItems });
     console.log(this.state.items);
